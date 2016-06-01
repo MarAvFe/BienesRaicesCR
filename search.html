@@ -31,7 +31,7 @@
               <li>
                 <a href="./rents.html">ALQUILER</a>
               </li>
-              <li>
+              <li class="active">
                 <a href="./search.html">BÚSQUEDA</a>
               </li>
             </ul>
@@ -39,14 +39,30 @@
         </div>
       </div>
       <div class="section section-Content col-md-12">
-        <h1 class="col-md-offset-1 text-muted">Mis Propiedades</h1>
+        <h1 class="col-md-offset-1 text-muted">Búsqueda</h1>
         <br>
         <br>
-        <div class="container col-md-3">
-          <br>
-          <button class="btn btn-block btn-info">Agregar propiedad</button>
-          <button class="btn btn-block btn-warning">Modificar propiedad</button>
-          <button class="btn btn-block btn-danger">Eliminar Propiedad</button>
+        <div class="container col-md-3 searchSection">
+		  <br>
+          <form role="form">
+            <div class="form-group">
+              <label class="control-label" for="province">Provincia</label>
+              <select class="selectpicker" id="province" data-live-search="true">
+                <option>Cartago</option>
+                <option>San Jose</option>
+                <option>Heredia</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="canton">Cantón</label>
+              <select class="selectpicker" id="canton" data-live-search="true">
+                <option>Oriental</option>
+                <option>Guadalupe</option>
+                <option>San Antonio</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">BUSCAR</button>
+          </form>
         </div>
         <div class="container col-md-9">
           <!-- For ng-repeat from here.... -->
@@ -58,7 +74,6 @@
               <a><h1>Casa a la venta en condominio</h1></a>
               <h6 class="text-danger">
                 <i class="fa fa-fw fa-map-marker"></i>San Pablo</h6>
-              <a href="#" class="text-info">Me Interesa <span class="badge">42</span></a>
               <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
                 ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
                 dis parturient montes, nasce...</p>
@@ -82,7 +97,6 @@
               <a><h1>Casa a la venta en condominio</h1></a>
               <h6 class="text-danger">
                 <i class="fa fa-fw fa-map-marker"></i>San Pablo</h6>
-              <a href="#" class="text-info">Me Interesa <span class="badge">42</span></a>
               <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
                 ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
                 dis parturient montes, nasce...</p>
@@ -106,7 +120,6 @@
               <a><h1>Casa a la venta en condominio</h1></a>
               <h6 class="text-danger">
                 <i class="fa fa-fw fa-map-marker"></i>San Pablo</h6>
-              <a href="#" class="text-info">Me Interesa <span class="badge">42</span></a>
               <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
                 ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
                 dis parturient montes, nasce...</p>
@@ -130,55 +143,6 @@
               <a><h1>Casa a la venta en condominio</h1></a>
               <h6 class="text-danger">
                 <i class="fa fa-fw fa-map-marker"></i>San Pablo</h6>
-              <a href="#" class="text-info">Me Interesa <span class="badge">42</span></a>
-              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-                ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
-                dis parturient montes, nasce...</p>
-              <h3 class="text-danger">
-                <strong>$
-                  <em>
-                    <span>185,000.00</span>
-                  </em>
-                </strong>
-              </h3>
-            </div>
-          </div>
-          <hr>
-          <!-- ....to here -->
-          <!-- For ng-repeat from here.... -->
-          <div class="row">
-            <div class="col-md-4">
-              <img src="../../Pictures/casaTemplate.png" class="img-responsive">
-            </div>
-            <div class="col-md-8">
-              <a><h1>Casa a la venta en condominio</h1></a>
-              <h6 class="text-danger">
-                <i class="fa fa-fw fa-map-marker"></i>San Pablo</h6>
-              <a href="#" class="text-info">Me Interesa <span class="badge">42</span></a>
-              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-                ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
-                dis parturient montes, nasce...</p>
-              <h3 class="text-danger">
-                <strong>$
-                  <em>
-                    <span>185,000.00</span>
-                  </em>
-                </strong>
-              </h3>
-            </div>
-          </div>
-          <hr>
-          <!-- ....to here -->
-          <!-- For ng-repeat from here.... -->
-          <div class="row">
-            <div class="col-md-4">
-              <img src="../../Pictures/casaTemplate.png" class="img-responsive">
-            </div>
-            <div class="col-md-8">
-              <a><h1>Casa a la venta en condominio</h1></a>
-              <h6 class="text-danger">
-                <i class="fa fa-fw fa-map-marker"></i>San Pablo</h6>
-              <a href="#" class="text-info">Me Interesa <span class="badge">42</span></a>
               <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
                 ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
                 dis parturient montes, nasce...</p>

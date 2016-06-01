@@ -20,7 +20,12 @@
   position: relative;
   top: 100px;
   border-left: 3px gray solid;
-  border-right: 3px #808080 solid;
+  border-right: 3px gray solid;
+}
+.searchSection {
+  border-right: 3px gray solid;
+  border-top: 3px gray solid;
+  border-bottom: 3px gray solid;
 }
 footer.section {
   position: relative;
