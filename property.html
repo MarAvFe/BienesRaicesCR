@@ -1,5 +1,5 @@
 <html  ng-app="AngularGoogleMap">
-  
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,7 @@
 
     <script src="js/lib/lodash.underscore.min.js"></script>
     <script src="js/lib/angular-google-maps.min.js"></script>
- 
+
     <script src="js/map-module.js"></script>
 
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -18,7 +18,7 @@
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
     rel="stylesheet" type="text/css">
     <link href="css/estiloTemplate.css" rel="stylesheet" type="text/css">
-  
+
     <style>
         .angular-google-map-container {
             height: 100%;
@@ -29,7 +29,7 @@
 
 
   </head>
-  
+
   <body ng-controller="MapCtrl">
     <div class="container">
       <div class="navbar navbar-default navbar-fixed-top">
@@ -41,7 +41,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" draggable="true"><img height="40" alt="Brand" src="../../Pictures/BienesRaícesCRLogoNarrow.png" class="img-thumbnail"></a>
+            <a class="navbar-brand" draggable="true"><img height="40" alt="Brand" src="img/BienesRaícesCRLogoNarrow.png" class="img-thumbnail"></a>
           </div>
           <div class="collapse navbar-collapse" id="navbar-ex-collapse">
             <ul class="nav navbar-left navbar-nav">
@@ -112,10 +112,10 @@
             <!-- End list -->
             <!-- Start GMaps -->
             <div class="col-md-8 col-md-offset-2" style="width:750px;height:500px">
-              <google-map  center="map.center" 
-                      zoom="map.zoom" 
-                      draggable="true" 
-                      options="map.options" 
+              <google-map  center="map.center"
+                      zoom="map.zoom"
+                      draggable="true"
+                      options="map.options"
                       control="map.control">
                   <marker coords="marker.coords" options="marker.options" idkey="marker.id" ></marker>
               </google-map>
