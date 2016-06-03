@@ -1,7 +1,6 @@
 <?php 
 
 
-
 // Recibe los datos que utilizará todo el sitio para manejar las conexiones a la base de datos
 $_SESSION['server'] = 'localhost';
 $_SESSION['username'] = 'root';
@@ -70,7 +69,8 @@ if ($conn->connect_error) {
           
           <?php 
 		  
-		  $pidUser=1;
+		 $pidUser = $_GET["idUser"];
+		 echo $pidUser;
 	  
 		$sql = "SELECT idProperty FROM property WHERE idUser='$pidUser'";
 				$result = $conn->query($sql);
