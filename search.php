@@ -44,13 +44,13 @@ if ($conn->connect_error) {
                 <a href="./index.html">INICIO</a>
               </li>
               <li>
-                <a href="./sales.html">VENTA</a>
+                <a href="./sales.php">VENTA</a>
               </li>
               <li>
                 <a href="./rents.html">ALQUILER</a>
               </li>
               <li class="active">
-                <a href="./search.html">BÚSQUEDA</a>
+                <a href="./search.php">BÚSQUEDA</a>
               </li>
             </ul>
           </div>
@@ -142,7 +142,7 @@ if ($conn->connect_error) {
 					  echo '<img src="img\casaTemplate.jpg" class="img-responsive">';
 					echo '</div>';
 					echo '<div class="col-md-8">';
-					  echo "<a href=\"http://localhost:8080/dashboard/bienesRaicesCR/property.html?idProperty=$idProperty\"><h1>$nameProperty</h1></a>";
+					  echo "<a href=\"http://localhost:8080/dashboard/bienesRaices/property.php?idProperty=$idProperty\"><h1>$nameProperty</h1></a>";
 					  echo '<h6 class="text-danger">';
 						echo"<i class=\"fa fa-fw fa-map-marker\"></i>$cityName</h6>";
 					  echo "<p>$description</p>";

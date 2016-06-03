@@ -9,8 +9,8 @@ if(!isset($_SESSION['loggedUser'])){
 }
 $_SESSION['server'] = 'localhost';
 $_SESSION['username'] = 'root';
-$_SESSION['password'] = '123456';
-$_SESSION['dbname'] = 'BiRaDb';
+$_SESSION['password'] = 'mysql123';
+$_SESSION['dbname'] = 'bienesraicescr';
 
 // Crea una nueva conexión
 $conn = new mysqli($_SESSION['server'], $_SESSION['username'], $_SESSION['password'], $_SESSION['dbname']);
@@ -35,8 +35,6 @@ if(isset($_GET["idProperty"])){
     $price = $row[2];
     $idType = $row[3];
     $description = $row[1];
-
-    $destacada = $isOutstanding == 1 ? "Si" : "No";
 
 
 
@@ -113,13 +111,13 @@ if(isset($_GET["idProperty"])){
                 <a href="./index.html">INICIO</a>
               </li>
               <li>
-                <a href="./sales.html">VENTA</a>
+                <a href="./sales.php">VENTA</a>
               </li>
               <li>
                 <a href="./rents.html">ALQUILER</a>
               </li>
               <li>
-                <a href="./search.html">BÚSQUEDA</a>
+                <a href="./search.php">BÚSQUEDA</a>
               </li>
             </ul>
           </div>
@@ -136,12 +134,10 @@ if(isset($_GET["idProperty"])){
               <p><?php echo $description; ?></p>
               <h3 class="col-md-5">Precio</h3>
               <h3 class="col-md-3">Tipo</h3>
-              <h3 class="col-md-4">Destacada</h3>
               <h4 class="col-md-5">$
                 <span><?php echo $price; ?></span>
               </h4>
               <h4 class="col-md-3"><?php echo $idType; ?></h4>
-              <h4 class="col-md-4"><?php echo $destacada; ?></h4>
               <a href="#" class="btn btn-md btn-primary col-md-12">Me Interesa</a>
             </div>
           </div>

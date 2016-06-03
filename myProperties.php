@@ -63,7 +63,7 @@ if ($conn->connect_error) {
         <br>
         <div class="container col-md-3">
           <br>
-          <button class="btn btn-block btn-info"><a href="http://localhost:8080/dashboard/bienesRaicesCR/createProperty.html">Agregar propiedad</a></button>
+          <button class="btn btn-block btn-info"><a href="http://localhost:8080/dashboard/bienesRaices/createProperty.html">Agregar propiedad</a></button>
           
         </div>
         <div class="container col-md-9">
@@ -117,7 +117,7 @@ if ($conn->connect_error) {
 					  echo '<img src="img\casaTemplate.jpg" class="img-responsive">';
 					echo '</div>';
 					echo '<div class="col-md-8">';
-					  echo "<a href=\"http://localhost:8080/dashboard/bienesRaicesCR/property.html?idProperty=$idProperty\"><h1>$nameProperty</h1></a>";
+					  echo "<a href=\"http://localhost:8080/dashboard/bienesRaicesCR/property.php?idProperty=$idProperty\"><h1>$nameProperty</h1></a>";
 					  echo '<h6 class="text-danger">';
 						echo"<i class=\"fa fa-fw fa-map-marker\"></i>$cityName</h6>";
 						echo "<a href=\"#\" class=\"text-info\">Me Interesa <span class=\"badge\">$interest</span></a>";
