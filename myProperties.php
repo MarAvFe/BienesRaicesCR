@@ -1,5 +1,6 @@
 <?php 
 
+$pidUser = $_GET["idUser"];
 
 // Recibe los datos que utilizará todo el sitio para manejar las conexiones a la base de datos
 $_SESSION['server'] = 'localhost';
@@ -41,13 +42,13 @@ if ($conn->connect_error) {
           <div class="collapse navbar-collapse" id="navbar-ex-collapse">
             <ul class="nav navbar-left navbar-nav">
               <li>
-                <a href="./index.html">INICIO</a>
+                <a href="./loginRegister.php">INICIO</a>
               </li>
-              <li>
+              <li class="active">
                 <a href="./sales.php">VENTA</a>
               </li>
               <li>
-                <a href="./rents.html">ALQUILER</a>
+                <a href="./sales.php">ALQUILER</a>
               </li>
               <li>
                 <a href="./search.php">BÚSQUEDA</a>
@@ -62,15 +63,15 @@ if ($conn->connect_error) {
         <br>
         <div class="container col-md-3">
           <br>
-          <button class="btn btn-block btn-info"><a href="http://localhost:8080/dashboard/bienesRaices/createProperty.html">Agregar propiedad</a></button>
+          <button class="btn btn-block btn-info"><a href="http://localhost:8080/dashboard/bienesRaices/createProperty.php?idUser=<?php echo $pidUser;?>">Agregar propiedad</a></button>
           
         </div>
         <div class="container col-md-9">
           
           <?php 
 		  
-		 $pidUser = $_GET["idUser"];
-		 echo $pidUser;
+		 
+		
 	  
 		$sql = "SELECT idProperty FROM property WHERE idUser='$pidUser'";
 				$result = $conn->query($sql);
@@ -94,16 +95,18 @@ if ($conn->connect_error) {
 						
 					}
 					
-					if (!($resultado = $conn->query("SELECT c.name
-											FROM property p 
+					if (!($resultado = $conn->query("SELECT g.latitude, g.longitude, c.name as city, s.name as state FROM property p 
 											INNER JOIN geolocation g ON (p.idGeolocation=g.idGeolocation) 
-											INNER JOIN city c ON (c.idCity=g.idCity)
+											INNER JOIN city c ON (c.idCity=g.idCity) INNER JOIN state s 
+											ON (c.idState=s.idState)
 											WHERE (p.idProperty='$idProperty');"))) {
-						echo "Falló CALL: (" . $conn->errno . ") " . $conn->error;
-					}else{
-						$fila = $resultado->fetch_assoc();
-						$cityName = $fila['name'];
-					}
+				echo "Falló CALL: (" . $conn->errno . ") " . $conn->error;
+				}else{
+					$fila = $resultado->fetch_assoc();
+					$cityName = $fila['city'];
+					$latitude = $fila['latitude'];
+					$longitude =$fila['longitude'];
+				}
 					
 					if (!($resultado = $conn->query("SELECT COUNT(1) as cant FROM interest WHERE idProperty='$idProperty';"))) {
 						echo "Falló CALL: (" . $conn->errno . ") " . $conn->error;
@@ -117,7 +120,7 @@ if ($conn->connect_error) {
 					  echo '<img src="img\casaTemplate.jpg" class="img-responsive">';
 					echo '</div>';
 					echo '<div class="col-md-8">';
-					  echo "<a href=\"http://localhost:8080/dashboard/bienesRaicesCR/property.php?idProperty=$idProperty\"><h1>$nameProperty</h1></a>";
+					  echo "<a href=\"http://localhost:8080/dashboard/bienesRaices/property.php?idProperty=$idProperty&latitude=$latitude&longitude=$longitude\"><h1>$nameProperty</h1></a>";
 					  echo '<h6 class="text-danger">';
 						echo"<i class=\"fa fa-fw fa-map-marker\"></i>$cityName</h6>";
 						echo "<a href=\"#\" class=\"text-info\">Me Interesa <span class=\"badge\">$interest</span></a>";

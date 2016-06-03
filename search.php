@@ -41,15 +41,15 @@ if ($conn->connect_error) {
           <div class="collapse navbar-collapse" id="navbar-ex-collapse">
             <ul class="nav navbar-left navbar-nav">
               <li>
-                <a href="./index.html">INICIO</a>
+                <a href="./loginRegister.php">INICIO</a>
               </li>
-              <li>
+              <li class="active">
                 <a href="./sales.php">VENTA</a>
               </li>
               <li>
-                <a href="./rents.html">ALQUILER</a>
+                <a href="./sales.php">ALQUILER</a>
               </li>
-              <li class="active">
+              <li>
                 <a href="./search.php">BÚSQUEDA</a>
               </li>
             </ul>
@@ -134,7 +134,19 @@ if ($conn->connect_error) {
 						$price = $fila['price'];
 						$typesale = $fila['typesale'];
 						
-						
+					}
+					
+					if (!($resultado = $conn->query("SELECT g.latitude, g.longitude, c.name as city, s.name as state FROM property p 
+											INNER JOIN geolocation g ON (p.idGeolocation=g.idGeolocation) 
+											INNER JOIN city c ON (c.idCity=g.idCity) INNER JOIN state s 
+											ON (c.idState=s.idState)
+											WHERE (p.idProperty='$idProperty');"))) {
+				echo "Falló CALL: (" . $conn->errno . ") " . $conn->error;
+					}else{
+						$fila = $resultado->fetch_assoc();
+						$cityN = $fila['city'];
+						$latitude = $fila['latitude'];
+						$longitude =$fila['longitude'];
 					}
 				
 				  echo '<div class="row">';
@@ -142,7 +154,7 @@ if ($conn->connect_error) {
 					  echo '<img src="img\casaTemplate.jpg" class="img-responsive">';
 					echo '</div>';
 					echo '<div class="col-md-8">';
-					  echo "<a href=\"http://localhost:8080/dashboard/bienesRaices/property.php?idProperty=$idProperty\"><h1>$nameProperty</h1></a>";
+					  echo "<a href=\"http://localhost:8080/dashboard/bienesRaices/property.php?idProperty=$idProperty&latitude=$latitude&longitude=$longitude\"><h1>$nameProperty</h1></a>";
 					  echo '<h6 class="text-danger">';
 						echo"<i class=\"fa fa-fw fa-map-marker\"></i>$cityName</h6>";
 					  echo "<p>$description</p>";
@@ -188,7 +200,19 @@ if ($conn->connect_error) {
 						$price = $fila['price'];
 						$typesale = $fila['typesale'];
 						
-						
+					}
+					
+					if (!($resultado = $conn->query("SELECT g.latitude, g.longitude, c.name as city, s.name as state FROM property p 
+											INNER JOIN geolocation g ON (p.idGeolocation=g.idGeolocation) 
+											INNER JOIN city c ON (c.idCity=g.idCity) INNER JOIN state s 
+											ON (c.idState=s.idState)
+											WHERE (p.idProperty='$idProperty');"))) {
+				echo "Falló CALL: (" . $conn->errno . ") " . $conn->error;
+					}else{
+						$fila = $resultado->fetch_assoc();
+						$cityN = $fila['city'];
+						$latitude = $fila['latitude'];
+						$longitude =$fila['longitude'];
 					}
 				
 				  echo '<div class="row">';
@@ -196,9 +220,9 @@ if ($conn->connect_error) {
 					  echo '<img src="img\casaTemplate.jpg" class="img-responsive">';
 					echo '</div>';
 					echo '<div class="col-md-8">';
-					  echo "<a href=\"http://localhost:8080/dashboard/bienesRaicesCR/property.html?idProperty=$idProperty\"><h1>$nameProperty</h1></a>";
+					  echo "<a href=\"http://localhost:8080/dashboard/bienesRaices/property.php?idProperty=$idProperty&latitude=$latitude&longitude=$longitude\"><h1>$nameProperty</h1></a>";
 					  echo '<h6 class="text-danger">';
-						echo"<i class=\"fa fa-fw fa-map-marker\"></i>$stateName</h6>";
+						echo"<i class=\"fa fa-fw fa-map-marker\"></i>$cityN</h6>";
 					  echo "<p>$description</p>";
 					  echo '<h3 class="text-danger">';
 						echo '<strong>$';

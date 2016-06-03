@@ -61,12 +61,12 @@ if(isset($_POST['register'])){
             }
 
             if($row = $result->fetch_row()){
-                $_SESSION["idUser"] = $row[0];
+                $idUser = $_SESSION["idUser"] = $row[0];
                 $_SESSION["name"] = $row[1];
                 $_SESSION["lastName"] = $row[2];
             }else{break;}
 
-            header("Location: ./myProperties.php");
+            header("Location: ./myProperties.php?idUser=$idUser");
             exit();
         }else{
             echo "Error en el inicio de sesion.";
@@ -102,17 +102,17 @@ if(isset($_POST['register'])){
           </div>
           <div class="collapse navbar-collapse" id="navbar-ex-collapse">
             <ul class="nav navbar-left navbar-nav">
+              <li>
+                <a href="./loginRegister.php">INICIO</a>
+              </li>
               <li class="active">
-                <a href="./index.html">INICIO</a>
+                <a href="./sales.php">VENTA</a>
               </li>
               <li>
-                <a href="./sales.html">VENTA</a>
+                <a href="./sales.php">ALQUILER</a>
               </li>
               <li>
-                <a href="./rents.html">ALQUILER</a>
-              </li>
-              <li>
-                <a href="./search.html">BÚSQUEDA</a>
+                <a href="./search.php">BÚSQUEDA</a>
               </li>
             </ul>
           </div>
