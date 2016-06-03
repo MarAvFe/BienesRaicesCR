@@ -2,8 +2,8 @@
 
 $_SESSION['server'] = 'localhost';
 $_SESSION['username'] = 'root';
-$_SESSION['password'] = '123456';
-$_SESSION['dbname'] = 'BiRaDb';
+$_SESSION['password'] = 'mysql123';
+$_SESSION['dbname'] = 'bienesraicescr';
 
 // Crea una nueva conexión
 $conn = new mysqli($_SESSION['server'], $_SESSION['username'], $_SESSION['password'], $_SESSION['dbname']);
@@ -23,11 +23,11 @@ if(isset($_POST['login'])){
     }
 
     if($row = $result->fetch_row()){
-        $_SESSION["idUser"] = $row[0];
+        $idUser = $_SESSION["idUser"] = $row[0];
         $_SESSION["name"] = $row[1];
         $_SESSION["lastName"] = $row[2];
 
-        header("Location: ./myProperties.php");
+        header("Location: ./myProperties.php?idUser=$idUser");
         exit();
     }else{
         echo "Error en el inicio de sesion.";

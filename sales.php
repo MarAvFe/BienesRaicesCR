@@ -24,6 +24,7 @@ if ($conn->connect_error) {
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css/estiloTemplate.css" rel="stylesheet" type="text/css">
+
   </head><body>
     <div class="container">
       <div class="navbar navbar-default navbar-fixed-top">
@@ -77,15 +78,17 @@ if ($conn->connect_error) {
 			$price = $row[3];
 			$typesale = $row[4];	
 			
-			if (!($resultado = $conn->query("SELECT c.name
-											FROM property p 
+			if (!($resultado = $conn->query("SELECT g.latitude, g.longitude, c.name as city, s.name as state FROM property p 
 											INNER JOIN geolocation g ON (p.idGeolocation=g.idGeolocation) 
-											INNER JOIN city c ON (c.idCity=g.idCity)
+											INNER JOIN city c ON (c.idCity=g.idCity) INNER JOIN state s 
+											ON (c.idState=s.idState)
 											WHERE (p.idProperty='$idProperty');"))) {
 				echo "Falló CALL: (" . $conn->errno . ") " . $conn->error;
 			}else{
 				$fila = $resultado->fetch_assoc();
-				$cityName = $fila['name'];
+				$cityName = $fila['city'];
+				$latitude = $fila['latitude'];
+				$longitude =$fila['longitude'];
 			}
 
 			
@@ -94,7 +97,7 @@ if ($conn->connect_error) {
               echo '<img src="img\casaTemplate.jpg" class="img-responsive">';
             echo '</div>';
             echo '<div class="col-md-8">';
-              echo "<a href=\"http://localhost:8080/dashboard/bienesRaices/property.php?idProperty=$idProperty\"><h1>$nameProperty</h1></a>";
+              echo "<a href=\"http://localhost:8080/dashboard/bienesRaices/property.php?idProperty=$idProperty&latitude=$latitude&longitude=$longitude\"><h1>$nameProperty</h1></a>";
 			  echo '<h6 class="text-danger">';
                 echo"<i class=\"fa fa-fw fa-map-marker\"></i>$cityName</h6>";
               echo "<p>$description</p>";
