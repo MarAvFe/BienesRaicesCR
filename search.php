@@ -198,7 +198,7 @@ if ($conn->connect_error) {
 					echo '<div class="col-md-8">';
 					  echo "<a href=\"http://localhost:8080/dashboard/bienesRaicesCR/property.html?idProperty=$idProperty\"><h1>$nameProperty</h1></a>";
 					  echo '<h6 class="text-danger">';
-						echo"<i class=\"fa fa-fw fa-map-marker\"></i>$cityName</h6>";
+						echo"<i class=\"fa fa-fw fa-map-marker\"></i>$stateName</h6>";
 					  echo "<p>$description</p>";
 					  echo '<h3 class="text-danger">';
 						echo '<strong>$';
