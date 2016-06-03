@@ -1,5 +1,6 @@
 <?php 
 
+$pidUser = $_GET["idUser"];
 
 // Recibe los datos que utilizará todo el sitio para manejar las conexiones a la base de datos
 $_SESSION['server'] = 'localhost';
@@ -41,13 +42,13 @@ if ($conn->connect_error) {
           <div class="collapse navbar-collapse" id="navbar-ex-collapse">
             <ul class="nav navbar-left navbar-nav">
               <li>
-                <a href="./index.html">INICIO</a>
+                <a href="./loginRegister.php">INICIO</a>
               </li>
-              <li>
+              <li class="active">
                 <a href="./sales.php">VENTA</a>
               </li>
               <li>
-                <a href="./rents.html">ALQUILER</a>
+                <a href="./sales.php">ALQUILER</a>
               </li>
               <li>
                 <a href="./search.php">BÚSQUEDA</a>
@@ -62,15 +63,15 @@ if ($conn->connect_error) {
         <br>
         <div class="container col-md-3">
           <br>
-          <button class="btn btn-block btn-info"><a href="http://localhost:8080/dashboard/bienesRaices/createProperty.html">Agregar propiedad</a></button>
+          <button class="btn btn-block btn-info"><a href="http://localhost:8080/dashboard/bienesRaices/createProperty.php?idUser=<?php echo $pidUser;?>">Agregar propiedad</a></button>
           
         </div>
         <div class="container col-md-9">
           
           <?php 
 		  
-		 $pidUser = $_GET["idUser"];
-		 echo $pidUser;
+		 
+		
 	  
 		$sql = "SELECT idProperty FROM property WHERE idUser='$pidUser'";
 				$result = $conn->query($sql);

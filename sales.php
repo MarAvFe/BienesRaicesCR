@@ -41,13 +41,13 @@ if ($conn->connect_error) {
           <div class="collapse navbar-collapse" id="navbar-ex-collapse">
             <ul class="nav navbar-left navbar-nav">
               <li>
-                <a href="./index.html">INICIO</a>
+                <a href="./loginRegister.php">INICIO</a>
               </li>
               <li class="active">
                 <a href="./sales.php">VENTA</a>
               </li>
               <li>
-                <a href="./rents.html">ALQUILER</a>
+                <a href="./sales.php">ALQUILER</a>
               </li>
               <li>
                 <a href="./search.php">BÚSQUEDA</a>
