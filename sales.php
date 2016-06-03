@@ -77,11 +77,15 @@ if ($conn->connect_error) {
 			$price = $row[3];
 			$typesale = $row[4];	
 			
-			if (!($resultado = $conn->query("select getCityName('$idProperty') as res"))) {
+			if (!($resultado = $conn->query("SELECT c.name
+											FROM property p 
+											INNER JOIN geolocation g ON (p.idGeolocation=g.idGeolocation) 
+											INNER JOIN city c ON (c.idCity=g.idCity)
+											WHERE (p.idProperty='$idProperty');"))) {
 				echo "Falló CALL: (" . $conn->errno . ") " . $conn->error;
 			}else{
 				$fila = $resultado->fetch_assoc();
-				$cityName = $fila['res'];
+				$cityName = $fila['name'];
 			}
 
 			
