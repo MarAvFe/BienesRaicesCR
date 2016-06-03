@@ -9,8 +9,8 @@ if(!isset($_SESSION['loggedUser'])){
 }
 $_SESSION['server'] = 'localhost';
 $_SESSION['username'] = 'root';
-$_SESSION['password'] = 'mysql123';
-$_SESSION['dbname'] = 'bienesraicescr';
+$_SESSION['password'] = '123456';
+$_SESSION['dbname'] = 'BiRaDb';
 
 // Crea una nueva conexión
 $conn = new mysqli($_SESSION['server'], $_SESSION['username'], $_SESSION['password'], $_SESSION['dbname']);
@@ -35,29 +35,6 @@ if(isset($_GET["idProperty"])){
     $price = $row[2];
     $idType = $row[3];
     $description = $row[1];
-
-
-
-      /*$sql = "select e.nameEvent,e.dateStartEvent,e.dateEndEvent, es.nameEventStructure
-    	from mydb.Event e, EventStructure es
-        where e.idEvent='$idEvent' and e.idEventStructure=es.idEventStructure;";
-        $result = $conn->query($sql);
-        if (!$result) {
-        echo 'Could not run query: ' . mysql_error();
-        exit;
-        }
-    	$row = $result->fetch_row();
-    	$nameEvent = $row[0];
-    	$dateStart = normalize_date($row[1]);
-    	$dateEnd = normalize_date($row[2]);
-    	$nameEventStructure = $row[3];
-
-      	$sql = "call getProperty('$dniPlayer',STR_TO_DATE('$birthdate','%d/%m/%Y'),'$fnamePlayer', '$snamePlayer','$lnamePlayer','$heightPlayer','$weightPlayer','$idCountry')";
-          $result = $conn->query($sql);
-          if (!$result) {
-      		echo 'Could not run query: ' . mysql_error();
-      		exit;
-        }*/
 }
 
 ?>
@@ -81,7 +58,6 @@ if(isset($_GET["idProperty"])){
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
     rel="stylesheet" type="text/css">
     <link href="css/estiloTemplate.css" rel="stylesheet" type="text/css">
-
     <style>
         .angular-google-map-container {
             height: 100%;
@@ -90,6 +66,12 @@ if(isset($_GET["idProperty"])){
         }
     </style>
 
+    <script>
+        function getInfo(){
+            var iframe = document.getElementById('iframe');
+            iframe.src = "./getOwnerData.php?idProperty=<?php echo $idProperty ?>";
+        }
+    </script>
   </head>
 
   <body ng-controller="MapCtrl">
@@ -138,9 +120,10 @@ if(isset($_GET["idProperty"])){
                 <span><?php echo $price; ?></span>
               </h4>
               <h4 class="col-md-3"><?php echo $idType; ?></h4>
-              <a href="#" class="btn btn-md btn-primary col-md-12">Me Interesa</a>
+              <button onClick="getInfo()" class="btn btn-md btn-primary col-md-12">Me Interesa</button>
             </div>
           </div>
+          <iframe name="iframe" id="iframe" hidden="true"></iframe>
           <br>
           <div class="btn-group">
             <a href="#" class="btn btn-info btn-lg">Características</a>
