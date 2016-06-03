@@ -16,7 +16,6 @@ if(isset($_POST['login'])){
     $logPass = $_POST["logPass"];
 
     $sql = "SELECT idUser, name, lastName FROM users WHERE (username='$logUser') and (password='$logPass');";
-    echo $sql;
     $result = $conn->query($sql);
     if (!$result) {
     	echo 'Could not run query(log): ' . $conn->connect_error;
@@ -47,20 +46,32 @@ if(isset($_POST['register'])){
     $sql = "INSERT INTO users (name,lastName,username,password,email,birthdate,phone)
 	VALUES ('$regName', '$regLast', '$regUser', '$regPass', '$regMail', '$regDate', '$regPhone');";
     $result = $conn->query($sql);
-    if (!$result) {
-    	echo 'Could not run query: ' . $conn->connect_error;
-    	exit;
-    }
+    while(true){
+        if (!$result) {
+            echo 'Could not run query(reg): ' . $conn->connect_error;
+            break;
+        }
 
-    if($row = $result->fetch_row()){
-        $_SESSION["idUser"] = $regUser;
-        $_SESSION["name"] = $regName;
-        $_SESSION["lastName"] = $regLast;
+        if($result > 0){
+            $sql = "SELECT idUser, name, lastName FROM users WHERE (username='$regUser') and (password='$regPass');";
+            $result = $conn->query($sql);
+            if (!$result) {
+            	echo 'Could not run query(log): ' . $conn->connect_error;
+            	exit;
+            }
 
-        header("Location: ./myProperties.php");
-        exit();
-    }else{
-        echo "Error en el inicio de sesion.";
+            if($row = $result->fetch_row()){
+                $_SESSION["idUser"] = $row[0];
+                $_SESSION["name"] = $row[1];
+                $_SESSION["lastName"] = $row[2];
+            }else{break;}
+
+            header("Location: ./myProperties.php");
+            exit();
+        }else{
+            echo "Error en el inicio de sesion.";
+        }
+        break;
     }
 }
 
@@ -148,7 +159,7 @@ if(isset($_POST['register'])){
                 <div class="form-group col-md-12">
                   <label class="control-label" for="registerBirth">Fecha de Nacimiento</label>
                   <div class="input-group date" id="registerBirth">
-                    <input type="text" class="form-control"  name="regDate" placeholder="dd/mm/yyyy">
+                    <input type="text" class="form-control"  name="regDate" placeholder="yyyy-mm-dd">
                     <span class="input-group-addon">
                       <span class="fa fa-calendar"></span>
                     </span>
@@ -157,7 +168,7 @@ if(isset($_POST['register'])){
                     $(function () {
                             $('#registerBirth').datetimepicker({
                                 viewMode: 'years',
-                                format: 'DD/MM/YYYY'
+                                format: 'YYYY-MM-DD'
                             });
                         });
 					/* https://eonasdan.github.io/bootstrap-datetimepicker/ */
@@ -169,7 +180,7 @@ if(isset($_POST['register'])){
                 </div>
                 <div class="form-group col-md-6">
                   <label class="control-label" for="registerPhone">Teléfono</label>
-                  <input class="form-control" name="regPhone" id="registerPhone" type="text" placeholder="8888-8888">
+                  <input class="form-control" name="regPhone" id="registerPhone" type="text" placeholder="88888888">
                 </div>
                 <button name="register" type="submit" class="btn btn-primary btn-block">REGISTRARSE</button>
               </form>
