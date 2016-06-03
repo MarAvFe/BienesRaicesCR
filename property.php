@@ -9,8 +9,8 @@ if(!isset($_SESSION['loggedUser'])){
 }
 $_SESSION['server'] = 'localhost';
 $_SESSION['username'] = 'root';
-$_SESSION['password'] = '123456';
-$_SESSION['dbname'] = 'BiRaDb';
+$_SESSION['password'] = 'mysql123';
+$_SESSION['dbname'] = 'bienesraicescr';
 
 // Crea una nueva conexión
 $conn = new mysqli($_SESSION['server'], $_SESSION['username'], $_SESSION['password'], $_SESSION['dbname']);
