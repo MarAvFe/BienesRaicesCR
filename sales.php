@@ -87,7 +87,7 @@ if ($conn->connect_error) {
 			
           echo '<div class="row">';
             echo '<div class="col-md-4">';
-              echo '<img src="../../Pictures/casaTemplate.png" class="img-responsive">';
+              echo '<img src="img\casaTemplate.jpg" class="img-responsive">';
             echo '</div>';
             echo '<div class="col-md-8">';
               echo "<a href=\"http://localhost:8080/dashboard/bienesRaicesCR/property.html?idProperty=$idProperty\"><h1>$nameProperty</h1></a>";
