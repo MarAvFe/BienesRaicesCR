@@ -27,7 +27,7 @@ if(isset($_GET["idProperty"])){
     $sql = "SELECT p.name, p.description, p.price, t.name as typesale FROM property p INNER JOIN typesale t ON (p.idType=t.idTypeSale) WHERE (p.idProperty=$idProperty);";
     $result = $conn->query($sql);
     if (!$result) {
-    	echo 'Could not run query: ' . mysql_error();
+    	echo 'Could not run query: ' . $conn->connect_error;
     	exit;
     }
     $row = $result->fetch_row();

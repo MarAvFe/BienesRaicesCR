@@ -1,6 +1,69 @@
 <?php
 
-    
+$_SESSION['server'] = 'localhost';
+$_SESSION['username'] = 'root';
+$_SESSION['password'] = '123456';
+$_SESSION['dbname'] = 'BiRaDb';
+
+// Crea una nueva conexión
+$conn = new mysqli($_SESSION['server'], $_SESSION['username'], $_SESSION['password'], $_SESSION['dbname']);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if(isset($_POST['login'])){
+    $logUser = $_POST["logUser"];
+    $logPass = $_POST["logPass"];
+
+    $sql = "SELECT idUser, name, lastName FROM users WHERE (username='$logUser') and (password='$logPass');";
+    echo $sql;
+    $result = $conn->query($sql);
+    if (!$result) {
+    	echo 'Could not run query(log): ' . $conn->connect_error;
+    	exit;
+    }
+
+    if($row = $result->fetch_row()){
+        $_SESSION["idUser"] = $row[0];
+        $_SESSION["name"] = $row[1];
+        $_SESSION["lastName"] = $row[2];
+
+        header("Location: ./myProperties.php");
+        exit();
+    }else{
+        echo "Error en el inicio de sesion.";
+    }
+}
+
+if(isset($_POST['register'])){
+    $regUser = $_POST['regUser'];
+    $regPass = $_POST['regPass'];
+    $regDate = $_POST['regDate'];
+    $regMail = $_POST['regMail'];
+    $regPhone = $_POST['regPhone'];
+    $regLast = $_POST['regLast'];
+    $regName = $_POST['regName'];
+
+    $sql = "INSERT INTO users (name,lastName,username,password,email,birthdate,phone)
+	VALUES ('$regName', '$regLast', '$regUser', '$regPass', '$regMail', '$regDate', '$regPhone');";
+    $result = $conn->query($sql);
+    if (!$result) {
+    	echo 'Could not run query: ' . $conn->connect_error;
+    	exit;
+    }
+
+    if($row = $result->fetch_row()){
+        $_SESSION["idUser"] = $regUser;
+        $_SESSION["name"] = $regName;
+        $_SESSION["lastName"] = $regLast;
+
+        header("Location: ./myProperties.php");
+        exit();
+    }else{
+        echo "Error en el inicio de sesion.";
+    }
+}
+
 
 ?><html><head>
     <meta charset="utf-8">
@@ -48,36 +111,44 @@
         <div class="container">
           <div class="row col-md">
             <div class="col-md-5 col-md-offset-1">
-              <form role="form">
+              <form role="form" method="post" action="./loginRegister.php">
                 <div class="form-group">
                   <label class="control-label" for="loginUser">Nombre de Usuario</label>
-                  <input class="form-control" id="loginUser" placeholder="Ingrese nombre de usuario" type="text">
+                  <input class="form-control" name="logUser" id="loginUser" placeholder="Ingrese nombre de usuario" type="text">
                 </div>
                 <div class="form-group">
                   <label class="control-label" for="loginPass">Contraseña</label>
-                  <input class="form-control" id="loginPass" placeholder="Contraseña" type="password">
+                  <input class="form-control" name="logPass" id="loginPass" placeholder="Contraseña" type="password">
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">INICIAR SESIÓN</button>
+                <button name="login" type="submit" class="btn btn-primary btn-block">INICIAR SESIÓN</button>
               </form>
             </div>
             <div class="col-md-5">
-              <form role="form">
+              <form role="form" method="post" action="./loginRegister.php">
                 <div class="form-group col-md-10">
                   <label class="control-label" for="registerUser">Nombre de usuario</label>
-                  <input class="form-control" id="registerUser" placeholder="Ingrese Nombre de Usuario" type="text">
+                  <input class="form-control" id="registerUser" name="regUser"  placeholder="Ingrese Nombre de Usuario" type="text">
                 </div>
+                  <div class="form-group col-md-10">
+                    <label class="control-label" for="registerName">Nombre del usuario</label>
+                    <input class="form-control" id="registerName" name="regName"  placeholder="Ingrese Su Nombre" type="text">
+                  </div>
+                    <div class="form-group col-md-10">
+                      <label class="control-label" for="registerLast">Apellido</label>
+                      <input class="form-control" id="registerLast" name="regLast"  placeholder="Ingrese Su Apellido" type="text">
+                    </div>
                 <div class="form-group col-md-6">
                   <label class="control-label" for="registerPass">Contraseña</label>
-                  <input class="form-control" id="registerPass" placeholder="Contraseña" type="password">
+                  <input class="form-control" id="registerPass"  name="regPass" placeholder="Contraseña" type="password">
                 </div>
                 <div class="form-group col-md-6">
                   <label class="control-label" for="registerPassCheck">Repita Contraseña</label>
-                  <input class="form-control" id="registerPassCheck" type="password" placeholder="Repita la contraseña">
+                  <input class="form-control" name="regPass2"  id="registerPassCheck" type="password" placeholder="Repita la contraseña">
                 </div>
                 <div class="form-group col-md-12">
                   <label class="control-label" for="registerBirth">Fecha de Nacimiento</label>
                   <div class="input-group date" id="registerBirth">
-                    <input type="text" class="form-control" placeholder="dd/mm/yyyy">
+                    <input type="text" class="form-control"  name="regDate" placeholder="dd/mm/yyyy">
                     <span class="input-group-addon">
                       <span class="fa fa-calendar"></span>
                     </span>
@@ -94,13 +165,13 @@
                 </div>
                 <div class="form-group col-md-6">
                   <label class="control-label" for="registerMail">Correo Electrónico</label>
-                  <input class="form-control" id="registerMail" placeholder="Correo" type="email">
+                  <input class="form-control" name="regMail"  id="registerMail" placeholder="Correo" type="email">
                 </div>
                 <div class="form-group col-md-6">
                   <label class="control-label" for="registerPhone">Teléfono</label>
-                  <input class="form-control" id="registerPhone" type="text" placeholder="8888-8888">
+                  <input class="form-control" name="regPhone" id="registerPhone" type="text" placeholder="8888-8888">
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">REGISTRARSE</button>
+                <button name="register" type="submit" class="btn btn-primary btn-block">REGISTRARSE</button>
               </form>
             </div>
           </div>
