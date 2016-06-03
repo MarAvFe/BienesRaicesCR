@@ -105,6 +105,13 @@ if ($conn->connect_error) {
 						$fila = $resultado->fetch_assoc();
 						$cityName = $fila['name'];
 					}
+					
+					if (!($resultado = $conn->query("SELECT COUNT(1) as cant FROM interest WHERE idProperty='$idProperty';"))) {
+						echo "Falló CALL: (" . $conn->errno . ") " . $conn->error;
+					}else{
+						$fila = $resultado->fetch_assoc();
+						$interest = $fila['cant'];
+					}
 				
 				  echo '<div class="row">';
 					echo '<div class="col-md-4">';
@@ -114,6 +121,7 @@ if ($conn->connect_error) {
 					  echo "<a href=\"http://localhost:8080/dashboard/bienesRaicesCR/property.html?idProperty=$idProperty\"><h1>$nameProperty</h1></a>";
 					  echo '<h6 class="text-danger">';
 						echo"<i class=\"fa fa-fw fa-map-marker\"></i>$cityName</h6>";
+						echo "<a href=\"#\" class=\"text-info\">Me Interesa <span class=\"badge\">$interest</span></a>";
 					  echo "<p>$description</p>";
 					  echo '<h3 class="text-danger">';
 						echo '<strong>$';
