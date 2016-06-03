@@ -45,13 +45,13 @@ if ($conn->connect_error) {
                 <a href="./index.html">INICIO</a>
               </li>
               <li>
-                <a href="./sales.html">VENTA</a>
+                <a href="./sales.php">VENTA</a>
               </li>
               <li>
                 <a href="./rents.html">ALQUILER</a>
               </li>
               <li>
-                <a href="./search.html">BÚSQUEDA</a>
+                <a href="./search.php">BÚSQUEDA</a>
               </li>
             </ul>
           </div>
@@ -63,9 +63,8 @@ if ($conn->connect_error) {
         <br>
         <div class="container col-md-3">
           <br>
-          <button class="btn btn-block btn-info">Agregar propiedad</button>
-          <button class="btn btn-block btn-warning">Modificar propiedad</button>
-          <button class="btn btn-block btn-danger">Eliminar Propiedad</button>
+          <button class="btn btn-block btn-info"><a href="http://localhost:8080/dashboard/bienesRaicesCR/createProperty.html">Agregar propiedad</a></button>
+          
         </div>
         <div class="container col-md-9">
           
